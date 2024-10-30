@@ -1,0 +1,121 @@
+//variables
+$inner-height: 100vh;
+$start-menu-radius: 8px;
+
+//disabling user selection
+* {
+  user-select: none;
+}
+
+//styles
+html {
+  overflow: hidden;
+  .main__bg {
+    background: url("./assets/main-background.png");
+    height: $inner-height;
+    background-size: cover;
+    background-position: center;
+    .taskbar {
+      backdrop-filter: saturate(3) blur(20px);
+      z-index: 1000000;
+      .widget__icon {
+        padding: 7px 10px 7px 10px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+        &:active {
+          scale: 0.9;
+        }
+      }
+      .taskbar__center__menu {
+        li {
+          height: 38px;
+          width: 38px;
+          display: grid;
+          place-items: center;
+          border-radius: 4px;
+          margin: 0 3px 0 3px;
+          transition: all 0.2s ease;
+          svg {
+            transition: scale 0.2s ease;
+          }
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+          &:active {
+            svg {
+              scale: 0.8;
+            }
+          }
+        }
+      }
+      .right__side__panel {
+        .arrow__up {
+          padding: 0 5px 0 5px;
+          transition: all 0.2s ease;
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+        .control__panel__icons {
+          transition: all 0.2s ease;
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+        .time__panel {
+          transition: all 0.2s ease;
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+    .control__center {
+      backdrop-filter: saturate(3) blur(20px);
+      transition: cubic-bezier(0.62, 0, 0.32, 1) 0.25s;
+      .control__svg {
+        path {
+          transition: fill 150ms ease;
+        }
+      }
+      .range {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 4px;
+        border-radius: 5px;
+        outline: none;
+        cursor: pointer;
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 17px;
+          height: 17px;
+          background-color: #4cc2ff;
+          border-radius: 50%;
+          border: 3px solid #454545;
+          transition: border-width 0.1s ease;
+          &:active {
+            border-width: 5px;
+          }
+        }
+      }
+    }
+    .start__menu {
+      background: rgba(36, 36, 36, 0.8);
+      height: min(100% - 24px, 720px);
+      width: 640px;
+      bottom: 12px;
+      left: 50%;
+      backdrop-filter: blur(20px);
+      border-radius: $start-menu-radius;
+      transition: all 0.2s cubic-bezier(0.79, 0.14, 0.15, 0.86);
+      .account__power {
+        border-top: 1px solid rgb(68, 68, 68);
+      }
+    }
+  }
+}
