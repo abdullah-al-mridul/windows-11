@@ -74,7 +74,7 @@ const Taskbar: FC<TaskbarProps> = ({
   // Render the JSX for the taskbar
   return (
     <>
-      <div className="taskbar w-full bg-taskbar/75 h-taskbar">
+      <div className="taskbar w-full h-taskbar">
         <div className="flex justify-between items-center h-full">
           <div className="widget__icon flex items-center gap-[11px] ml-[18px]">
             <div>

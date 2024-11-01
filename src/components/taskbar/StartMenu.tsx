@@ -172,104 +172,113 @@ const StartMenu = forwardRef<HTMLDivElement, StartMenuProps>(
         }}
         className="start__menu absolute"
       >
-        <div className=" flex flex-col h-full">
-          <div className=" flex-1 flex flex-col justify-between">
-            <div className=" px-[40px] py-[32px]">
-              <div className=" flex justify-between items-center px-[30px]">
-                <div className=" text-white text-[14px] font-sans font-medium">
-                  Pinned
+        <div className=" h-full start__menu__layer__1">
+          <div className=" h-full start__menu__layer__2">
+            <div className=" flex flex-col h-full">
+              <div
+                style={{
+                  borderRadius: "8px 8px 0 0",
+                }}
+                className=" flex-1 flex flex-col justify-between bg-white/[0.038]"
+              >
+                <div className=" px-[40px] py-[32px]">
+                  <div className=" flex justify-between items-center px-[30px]">
+                    <div className=" text-white text-[14px] font-sans font-medium">
+                      Pinned
+                    </div>
+                    <div>
+                      <button className=" bg-white/10 text-[10.24px] text-white flex items-center gap-[3px] px-[8px] py-[2px] rounded-[3px]">
+                        <span>All apps</span>
+                        <span>
+                          {isIconComponent(ArrowRightIcon) ? (
+                            <ArrowRightIcon />
+                          ) : null}
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                  <div className=" py-[20px]">
+                    <div className=" w-full flex flex-wrap">
+                      {appList.map((app, idx) => {
+                        const { name, icon } = app;
+                        return isIconComponent(icon) ? (
+                          <AppListCard
+                            key={idx}
+                            appName={name}
+                            icon={React.createElement(icon, {
+                              height: 32,
+                              width: 32,
+                            })}
+                          />
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
                 </div>
                 <div>
-                  <button className=" bg-white/10 text-[10.24px] text-white flex items-center gap-[3px] px-[8px] py-[2px] rounded-[3px]">
-                    <span>All apps</span>
-                    <span>
-                      {isIconComponent(ArrowRightIcon) ? (
-                        <ArrowRightIcon />
-                      ) : null}
-                    </span>
-                  </button>
+                  <div className=" px-[70px] pb-[12px]">
+                    <div className=" flex justify-between items-center">
+                      <div className=" text-white text-[14px] font-sans font-medium">
+                        Recommended
+                      </div>
+                      <div>
+                        <button className=" bg-white/10 text-[10.24px] text-white flex items-center gap-[3px] px-[8px] py-[2px] rounded-[3px]">
+                          <span>More</span>
+                          <span>
+                            {isIconComponent(ArrowRightIcon) ? (
+                              <ArrowRightIcon />
+                            ) : null}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-[60px]">
+                    <div className="flex pb-[7px] justify-between flex-wrap">
+                      {recommendedApps.map((app, idx) => {
+                        const { name, desc, icon } = app;
+                        return isIconComponent(icon) ? (
+                          <RecommendedAppList
+                            key={idx}
+                            appName={name}
+                            addDesc={desc}
+                            icon={React.createElement(icon, {
+                              height: 32,
+                              width: 32,
+                            })}
+                          />
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className=" py-[20px]">
-                <div className=" w-full flex flex-wrap">
-                  {appList.map((app, idx) => {
-                    const { name, icon } = app;
-                    return isIconComponent(icon) ? (
-                      <AppListCard
-                        key={idx}
-                        appName={name}
-                        icon={React.createElement(icon, {
-                          height: 32,
-                          width: 32,
-                        })}
+              <div className="account__power px-[48px] h-[64px]">
+                <div className=" h-full w-full flex justify-between items-center">
+                  <div className=" flex items-center gap-[12px] transition-all duration-100 hover:bg-white/10 rounded px-[13px] py-[10px]">
+                    <div>
+                      <img
+                        className="h-[26px] w-[26px] rounded-full"
+                        alt="profile"
+                        src="/profile.jpg"
                       />
-                    ) : null;
-                  })}
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className=" px-[70px] pb-[12px]">
-                <div className=" flex justify-between items-center">
-                  <div className=" text-white text-[14px] font-sans font-medium">
-                    Recommended
+                    </div>
+                    <div>
+                      <p
+                        className=" text-[11px] font-[500] font-open-sans"
+                        style={{
+                          color: "rgb(221, 221, 221)",
+                        }}
+                      >
+                        Abdullah Al Mridul
+                      </p>
+                    </div>
                   </div>
                   <div>
-                    <button className=" bg-white/10 text-[10.24px] text-white flex items-center gap-[3px] px-[8px] py-[2px] rounded-[3px]">
-                      <span>More</span>
-                      <span>
-                        {isIconComponent(ArrowRightIcon) ? (
-                          <ArrowRightIcon />
-                        ) : null}
-                      </span>
-                    </button>
+                    <div className=" text-white h-[40px] w-[40px] flex items-center justify-center hover:bg-white/10 transition-all rounded">
+                      {isIconComponent(PowerIcon) ? <PowerIcon /> : null}
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="px-[60px]">
-                <div className="flex pb-[7px] justify-between flex-wrap">
-                  {recommendedApps.map((app, idx) => {
-                    const { name, desc, icon } = app;
-                    return isIconComponent(icon) ? (
-                      <RecommendedAppList
-                        key={idx}
-                        appName={name}
-                        addDesc={desc}
-                        icon={React.createElement(icon, {
-                          height: 32,
-                          width: 32,
-                        })}
-                      />
-                    ) : null;
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="account__power px-[48px] h-[64px]">
-            <div className=" h-full w-full flex justify-between items-center">
-              <div className=" flex items-center gap-[12px] transition-all duration-100 hover:bg-white/10 rounded px-[13px] py-[10px]">
-                <div>
-                  <img
-                    className="h-[26px] w-[26px] rounded-full"
-                    alt="profile"
-                    src="/profile.jpg"
-                  />
-                </div>
-                <div>
-                  <p
-                    className=" text-[11px] font-[500] font-open-sans"
-                    style={{
-                      color: "rgb(221, 221, 221)",
-                    }}
-                  >
-                    Abdullah Al Mridul
-                  </p>
-                </div>
-              </div>
-              <div>
-                <div className=" text-white h-[40px] w-[40px] flex items-center justify-center hover:bg-white/10 transition-all rounded">
-                  {isIconComponent(PowerIcon) ? <PowerIcon /> : null}
                 </div>
               </div>
             </div>

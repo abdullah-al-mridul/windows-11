@@ -56,6 +56,9 @@ const ControlCenter = forwardRef<HTMLDivElement, ControlCenterProps>(
 
     const VolumeIcon = getIcon("controlVolume");
     const BrightnessIcon = getIcon("controlBrightness");
+    const BatteryIcon = getIcon("controlBattery");
+    const EditIcon = getIcon("controlEdit");
+    const SettingsIcon = getIcon("controlSettings");
 
     return (
       <div
@@ -66,74 +69,114 @@ const ControlCenter = forwardRef<HTMLDivElement, ControlCenterProps>(
           pointerEvents: isOpen ? "auto" : "none",
           visibility: isOpen ? "visible" : "hidden",
         }}
-        className="control__center bg-controlCenter/75 absolute bottom-3 w-[360px] rounded-lg min-h-[200px] right-3"
+        className="control__center absolute bottom-3 w-[360px] rounded-lg min-h-[200px] right-3"
       >
-        <div className="px-5 py-5 pb-[32px]">
-          <div className="grid grid-cols-3 gap-[13px]">
-            {controlItems.map(({ id, iconName, label }) => {
-              const IconComponent = getIcon(iconName);
-              return (
-                <div key={id}>
-                  <div
-                    key={id}
-                    className={`w-full bg-white/[.07] transition-all border-[1.3px] border-white/[.04] flex justify-center items-center h-[55px] rounded cursor-pointer ${
-                      controlStates[id] ? "bg-[#60CDFF]" : ""
-                    }`}
-                    onClick={() => toggleControl(id)}
-                  >
-                    {isIconComponent(IconComponent) ? (
-                      <IconComponent
-                        height={20}
-                        width={20}
-                        fill={controlStates[id] ? "rgba(0,0,0,.89)" : "white"}
-                      />
-                    ) : null}
-                  </div>
-                  <p className=" text-xs mt-2 text-center text-nowrap text-white font-open-sans">
-                    {label}
-                  </p>
+        <div className="control__center__layer__1">
+          <div className="control__center__layer__2">
+            <div className="px-5 py-5 pb-[32px] bg-white/[0.03]">
+              <div className="grid grid-cols-3 gap-[13px]">
+                {controlItems.map(({ id, iconName, label }) => {
+                  const IconComponent = getIcon(iconName);
+                  return (
+                    <div key={id}>
+                      <div
+                        key={id}
+                        style={{
+                          background: controlStates[id]
+                            ? "#60CDFF"
+                            : "rgb(255 255 255 / .07)",
+                        }}
+                        className={`w-full bg-white/[.07] transition-all border-[1.3px] border-white/[.04] flex justify-center items-center h-[55px] rounded cursor-pointer`}
+                        onClick={() => toggleControl(id)}
+                      >
+                        {isIconComponent(IconComponent) ? (
+                          <IconComponent
+                            height={20}
+                            width={20}
+                            fill={
+                              controlStates[id] ? "rgba(0,0,0,.89)" : "white"
+                            }
+                          />
+                        ) : null}
+                      </div>
+                      <p className=" text-xs mt-2 text-center text-nowrap text-white font-open-sans">
+                        {label}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className=" mt-[30px] flex justify-between items-center pl-[8px] gap-[8px]">
+                <div className=" w-max">
+                  {isIconComponent(VolumeIcon) ? (
+                    <VolumeIcon height={20} width={20} />
+                  ) : null}
                 </div>
-              );
-            })}
-          </div>
-          <div className=" mt-[30px] flex justify-between items-center pl-[8px] gap-[8px]">
-            <div className=" w-max">
-              {isIconComponent(VolumeIcon) ? (
-                <VolumeIcon height={20} width={20} />
-              ) : null}
+                <div className=" w-full flex items-center">
+                  <input
+                    type="range"
+                    value={volume}
+                    onChange={(e) => setVolume(+e.target.value)}
+                    name="volume"
+                    id="volume"
+                    style={{
+                      background: `linear-gradient(90deg, #4cc2ff ${volume}%, #888888 ${volume}%)`,
+                    }}
+                    className=" w-full range"
+                  />
+                </div>
+              </div>
+              <div className=" mt-[30px] flex justify-between items-center pl-[8px] gap-[8px]">
+                <div className=" w-max">
+                  {isIconComponent(BrightnessIcon) ? (
+                    <BrightnessIcon height={20} width={20} />
+                  ) : null}
+                </div>
+                <div className=" w-full flex items-center">
+                  <input
+                    type="range"
+                    value={brightness}
+                    onChange={(e) => setBrightness(+e.target.value)}
+                    name="volume"
+                    id="volume"
+                    style={{
+                      background: `linear-gradient(90deg, #4cc2ff ${brightness}%, #888888 ${brightness}%)`,
+                    }}
+                    className=" w-full range"
+                  />
+                </div>
+              </div>
             </div>
-            <div className=" w-full flex items-center">
-              <input
-                type="range"
-                value={volume}
-                onChange={(e) => setVolume(+e.target.value)}
-                name="volume"
-                id="volume"
-                style={{
-                  background: `linear-gradient(90deg, #4cc2ff ${volume}%, #888888 ${volume}%)`,
-                }}
-                className=" w-full range"
-              />
-            </div>
-          </div>
-          <div className=" mt-[30px] flex justify-between items-center pl-[8px] gap-[8px]">
-            <div className=" w-max">
-              {isIconComponent(BrightnessIcon) ? (
-                <BrightnessIcon height={20} width={20} />
-              ) : null}
-            </div>
-            <div className=" w-full flex items-center">
-              <input
-                type="range"
-                value={brightness}
-                onChange={(e) => setBrightness(+e.target.value)}
-                name="volume"
-                id="volume"
-                style={{
-                  background: `linear-gradient(90deg, #4cc2ff ${brightness}%, #888888 ${brightness}%)`,
-                }}
-                className=" w-full range"
-              />
+            <div className=" flex items-center justify-between p-[4px] border-t border-white/[.08]">
+              <div>
+                <div className=" flex items-center px-[12px] h-[40px] gap-[5px] hover:bg-white/[0.07] transition-all border border-transparent hover:border-white/[0.03] rounded">
+                  <span>
+                    {isIconComponent(BatteryIcon) ? (
+                      <BatteryIcon width={20} height={20} />
+                    ) : null}
+                  </span>
+                  <span className=" text-[12px] text-white font-open-sans">
+                    92%
+                  </span>
+                </div>
+              </div>
+              <div className=" flex items-center px-[8px] gap-[8px]">
+                <div className="hover:bg-white/[0.07] transition-all p-[10px] rounded border border-transparent hover:border-white/[0.03]">
+                  {" "}
+                  <span>
+                    {isIconComponent(EditIcon) ? (
+                      <EditIcon height={17} width={17} />
+                    ) : null}
+                  </span>
+                </div>
+                <div className="hover:bg-white/[0.07] transition-all p-[10px] rounded border border-transparent hover:border-white/[0.03]">
+                  <span>
+                    {isIconComponent(SettingsIcon) ? (
+                      <SettingsIcon height={17} width={17} />
+                    ) : null}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
